@@ -2,13 +2,7 @@ import Category from "../models/category.model";
 
 export const getCategories = async (req, res) => {
     const {query} = req
-    let filter: any = {parent: {$exists: false}}
-    if (query.parent) {
-        filter.parent = query.parent
-    }
-    if (query.parents) {
-        filter.parent = {$in: query.parents}
-    }
+    let filter: any = {}
     if (query.search) {
         filter['name'] = {$regex: new RegExp(query.search.toLowerCase(), "i")}
     }

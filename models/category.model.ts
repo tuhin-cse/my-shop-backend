@@ -7,11 +7,7 @@ let schema = new Schema({
         },
         image: String,
         active: Boolean,
-        description: String,
-        parent: {
-            type: Schema.Types.ObjectId,
-            ref: 'category',
-        }
+        description: String
     }, {timestamps: true}
 )
 const Category = model('category', schema)
