@@ -16,26 +16,14 @@ let schema = new Schema({
     password: String,
     phone: String,
     active: Boolean,
-    birthday: String,
-    id_number: String,
-    id_type: String,
-    roles: [{
+    admin: {
+        type: Boolean,
+        default: false,
+    },
+    role: {
         type: Schema.Types.ObjectId,
         ref: 'role',
-    }],
-    country: String,
-    city: String,
-    area: String,
-    street: String,
-    building: String,
-    door: String,
-    address: String,
-    image: String,
-    id: String,
-    parent: {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-    },
+    }
 }, {timestamps: true})
 schema.plugin(paginate)
 const User = model('user', schema)

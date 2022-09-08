@@ -13,4 +13,18 @@ apiRoutes.use('/user', userRoutes)
 apiRoutes.use('/role', roleRoutes)
 apiRoutes.use('/settings', settingsRoutes)
 
+apiRoutes.use(function(err, req, res, next) {
+    try {
+        return res.status(500).send({
+            error: true,
+            msg: 'Server failed'
+        })
+    } catch (e) {
+        return res.status(500).send({
+            error: true,
+            msg: 'Server failed'
+        })
+    }
+});
+
 export default apiRoutes

@@ -72,27 +72,20 @@ export const userLogin = async (req, res) => {
 }
 
 export const userVerify = async (req, res) => {
-    try {
-        if (res.locals?.user?._id) {
-            let user = await User.findById(res.locals?.user?._id, ['first_name', 'last_name', 'roles']).populate('roles', ['name', 'permissions'])
-            if (user) {
-                return res.status(200).send({
-                    error: false,
-                    msg: 'Successfully verified',
-                    data: user,
-                })
-            }
+    if (res.locals?.user?._id) {
+        let user = await User.findById(res.locals?.user?._id, ['first_name', 'last_name', 'role', 'admin']).populate('role', ['name', 'permissions'])
+        if (user) {
+            return res.status(200).send({
+                error: false,
+                msg: 'Successfully verified',
+                data: user,
+            })
         }
-        res.status(404).json({
-            error: true,
-            msg: 'User not found'
-        })
-    } catch (e) {
-        return res.status(500).send({
-            error: true,
-            msg: 'Server failed'
-        })
     }
+    res.status(404).json({
+        error: true,
+        msg: 'User not found'
+    })
 }
 
 export const userProfile = async (req, res) => {
